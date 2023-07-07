@@ -1,0 +1,13 @@
+{
+  "name": "GitHub nya",
+  "description": "Add nya suffix to GitHub pull request comments",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/*/pull/*"],
+      "js": ["content_scripts.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
