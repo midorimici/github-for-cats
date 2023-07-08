@@ -22,6 +22,10 @@ const findTextNodes = (node: Node): Node[] => {
     }
   }
 
+  if (node.nodeName === 'CODE') {
+    return [];
+  }
+
   let foundNodes: Node[] = [];
 
   for (const n of node.childNodes) {
@@ -36,13 +40,24 @@ const findTextNodes = (node: Node): Node[] => {
   return foundNodes;
 };
 
-const lineEndChars = '.。!！?？';
+const lineEndChars = '.。!！?？~～';
 const lineEndRegex = `([${lineEndChars}]?)$`;
+
 const enLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
-const enLineMiddleRegex = new RegExp(`(\\w)([${lineEndChars}])([ \\w])`);
+const enLineMiddleRegex = new RegExp(`(\\w)([${lineEndChars}]) `, 'g');
+const enSuffix = 'nya';
+
+const jaChars = '\\p{scx=Hiragana}\\p{scx=Katakana}\\p{scx=Han}';
+const jaLineEndRegex = new RegExp(`([${jaChars}])${lineEndRegex}`, 'gu');
+const jaLineMiddleRegex = new RegExp(`([${jaChars}])([${lineEndChars}])([ ${jaChars}])`, 'gu');
+const jaSuffix = 'にゃ';
 
 const suffixAddedText = (text: string): string => {
-  return text.replace(enLineEndRegex, '$1 nya$2').replace(enLineMiddleRegex, '$1 nya$2$3');
+  return text
+    .replace(enLineEndRegex, `$1 ${enSuffix}$2`)
+    .replace(enLineMiddleRegex, `$1 ${enSuffix}$2 `)
+    .replace(jaLineEndRegex, `$1${jaSuffix}$2`)
+    .replace(jaLineMiddleRegex, `$1${jaSuffix}$2$3`);
 };
 
 main();
