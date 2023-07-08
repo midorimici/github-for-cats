@@ -9,15 +9,21 @@ type ImageData = {
 
 type Response = ImageData[];
 
-const fetchAPI = async (mimeTypes: string): Promise<Response> => {
-  const response = await fetch(`${theCatAPIURL}?mime_types=${mimeTypes}`);
+const fetchAPI = async (queryParams: string): Promise<Response> => {
+  const response = await fetch(`${theCatAPIURL}?${queryParams}`);
   const json = await response.json();
   return json;
 };
 
 export const catImageURL = async (isGIF: boolean): Promise<string> => {
-  const mimeTypes = isGIF ? 'gif' : 'jpg,png';
-  const response = await fetchAPI(mimeTypes);
+  let queryParams: string;
+  if (isGIF) {
+    queryParams = 'mime_types=gif&size=small';
+  } else {
+    queryParams = 'mime_types=png,jpg';
+  }
+
+  const response = await fetchAPI(queryParams);
   const URL = response[0].url;
   return URL;
 };
