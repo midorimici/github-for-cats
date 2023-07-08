@@ -39,16 +39,17 @@ const findTextNodes = (node: Node): Node[] => {
   return foundNodes;
 };
 
-const lineEndChars = '.。!！?？~～';
-const lineEndRegex = `([${lineEndChars}]?)$`;
+const ellipsisRegex = '\\.{2,}|…+';
+const lineEndCharsRegex = `([.。!！?？~～]|${ellipsisRegex})`;
+const lineEndRegex = `${lineEndCharsRegex}?$`;
 
 const enLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
-const enLineMiddleRegex = new RegExp(`(\\w)([${lineEndChars}]) `, 'g');
+const enLineMiddleRegex = new RegExp(`(\\w)${lineEndCharsRegex} `, 'g');
 const enSuffix = 'nya';
 
 const jaChars = '\\p{scx=Hiragana}\\p{scx=Katakana}\\p{scx=Han}';
 const jaLineEndRegex = new RegExp(`([${jaChars}])${lineEndRegex}`, 'gu');
-const jaLineMiddleRegex = new RegExp(`([${jaChars}])([${lineEndChars}])([ ${jaChars}])`, 'gu');
+const jaLineMiddleRegex = new RegExp(`([${jaChars}])${lineEndCharsRegex}([ ${jaChars}])`, 'gu');
 const jaSuffix = 'にゃ';
 
 const suffixAddedText = (text: string): string => {
