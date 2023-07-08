@@ -40,7 +40,7 @@ const replace = async (images: Element[]) => {
     if (imgMap.has(userName)) {
       newImageURL = imgMap.get(userName)!;
     } else {
-      newImageURL = await catImageURL(false);
+      newImageURL = await catImageURL(true);
       imgMap.set(userName, newImageURL);
     }
     image.setAttribute('src', newImageURL);
