@@ -1,6 +1,9 @@
 const main = () => {
-  const paragraphs = document.querySelectorAll('p[dir="auto"]');
+  addSuffixes();
+};
 
+const addSuffixes = () => {
+  const paragraphs = document.querySelectorAll('p[dir="auto"]');
   for (const p of paragraphs) {
     const textNodes = findTextNodes(p);
     for (const textNode of textNodes) {
