@@ -36,7 +36,7 @@ const findTextNodes = (node: Node): Node[] => {
   return foundNodes;
 };
 
-const lineEndChars = '.。!！?？';
+const lineEndChars = '.。!！?？~～';
 const lineEndRegex = `([${lineEndChars}]?)$`;
 const enLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
 const enLineMiddleRegex = new RegExp(`(\\w)([${lineEndChars}]) `);
