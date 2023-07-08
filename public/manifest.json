@@ -2,9 +2,10 @@
   "manifest_version": 3,
   "name": "Peaceful GitHub pull request",
   "short_name": "Peaceful PR",
-  "description": "Add suffix and animal images to GitHub pull request comments",
+  "description": "__MSG_ext_desc__",
   "version": "1.0.0",
   "author": "midorimici",
+  "default_locale": "ja",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
