@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev": "webpack --watch",
+    "build": "webpack"
+  },
   "devDependencies": {
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/webpack": "^5.28.1",
