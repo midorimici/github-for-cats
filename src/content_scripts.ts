@@ -22,6 +22,10 @@ const findTextNodes = (node: Node): Node[] => {
     }
   }
 
+  if (node.nodeName === 'CODE') {
+    return [];
+  }
+
   let foundNodes: Node[] = [];
 
   for (const n of node.childNodes) {
