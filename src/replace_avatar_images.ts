@@ -1,3 +1,5 @@
+import { catImageURL } from './api';
+
 export const replaceAvatarImages = () => {
   const images = findAvatarImages();
   replace(images);
@@ -38,7 +40,7 @@ const replace = async (images: Element[]) => {
     if (imgMap.has(userName)) {
       newImageURL = imgMap.get(userName)!;
     } else {
-      newImageURL = await catImageURL();
+      newImageURL = await catImageURL(true);
       imgMap.set(userName, newImageURL);
     }
     image.setAttribute('src', newImageURL);
@@ -53,27 +55,4 @@ const userNameFromImage = (image: Element): string | null => {
   }
 
   return altText.replace('@', '');
-};
-
-const catImageURL = async (): Promise<string> => {
-  const response = await fetchAPI();
-  const URL = response[0].url;
-  return URL;
-};
-
-const theCatAPIRequestURL = 'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png';
-
-type ImageData = {
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-};
-
-type Response = ImageData[];
-
-const fetchAPI = async (): Promise<Response> => {
-  const response = await fetch(theCatAPIRequestURL);
-  const json = await response.json();
-  return json;
 };
