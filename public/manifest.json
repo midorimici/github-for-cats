@@ -1,6 +1,6 @@
 {
-  "name": "GitHub nya",
-  "description": "Add nya suffix to GitHub pull request comments",
+  "name": "Peaceful GitHub pull request",
+  "description": "Add suffix and animal images to GitHub pull request comments",
   "version": "0.1.0",
   "manifest_version": 3,
   "content_scripts": [
