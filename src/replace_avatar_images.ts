@@ -42,6 +42,7 @@ const replace = async (images: Element[]) => {
       imgMap.set(userName, newImageURL);
     }
     image.setAttribute('src', newImageURL);
+    image.setAttribute('style', 'object-fit: cover;');
   }
 };
 
