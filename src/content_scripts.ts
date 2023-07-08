@@ -40,9 +40,12 @@ const lineEndChars = '.。!！?？';
 const lineEndRegex = `([${lineEndChars}]?)$`;
 const enLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
 const enLineMiddleRegex = new RegExp(`(\\w)([${lineEndChars}])([ \\w])`);
+const enSuffix = 'nya';
 
 const suffixAddedText = (text: string): string => {
-  return text.replace(enLineEndRegex, '$1 nya$2').replace(enLineMiddleRegex, '$1 nya$2$3');
+  return text
+    .replace(enLineEndRegex, `$1 ${enSuffix}$2`)
+    .replace(enLineMiddleRegex, `$1 ${enSuffix}$2$3`);
 };
 
 main();
