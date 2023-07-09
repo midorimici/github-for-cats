@@ -7,6 +7,7 @@ const config = (): Configuration => {
     mode: 'production',
     entry: {
       content_scripts: path.join(__dirname, 'src', 'content_scripts.ts'),
+      popup: path.join(__dirname, 'src', 'popup', 'index.tsx'),
     },
     output: {
       // distディレクトリにcontent_scripts.jsを吐く
@@ -16,14 +17,14 @@ const config = (): Configuration => {
     module: {
       rules: [
         {
-          test: /.ts$/,
+          test: /.tsx?$/,
           use: 'ts-loader',
           exclude: '/node_modules/',
         },
       ],
     },
     resolve: {
-      extensions: ['.ts', '.js'],
+      extensions: ['.ts', '.tsx', '.js'],
     },
     plugins: [
       // publicディレクトリにあるファイルをdistディレクトリにコピーする
