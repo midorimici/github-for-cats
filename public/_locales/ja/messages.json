@@ -19,5 +19,8 @@
   },
   "regexSupported": {
     "message": "正規表現対応"
+  },
+  "refreshAvatarImages": {
+    "message": "アバター画像を更新"
   }
 }

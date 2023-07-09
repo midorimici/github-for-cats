@@ -19,5 +19,8 @@
   },
   "regexSupported": {
     "message": "Regular expression supported"
+  },
+  "refreshAvatarImages": {
+    "message": "Referesh avatar images"
   }
 }
