@@ -1,0 +1,51 @@
+$primary-color: orange;
+$grey: #aaa;
+$light-grey: #eee;
+$size: 4px;
+
+input {
+  border: none;
+  padding: 2 * $size 0;
+  outline: none;
+  background-color: transparent;
+}
+
+.title {
+  font-size: 1.6rem;
+}
+
+.suffix-config-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2 * $size;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 2 * $size;
+}
+
+.inline-form {
+  display: flex;
+  gap: 4 * $size;
+  border: solid 1px $grey;
+  border-radius: 2 * $size;
+  background-color: $light-grey;
+  padding: 0 2 * $size;
+  input {
+    flex-grow: 1;
+  }
+
+  transition: background-color 0.4s;
+  &:focus-within {
+    background-color: transparent;
+  }
+}
+
+.icon-container {
+  width: 4 * $size;
+  display: flex;
+  align-items: center;
+  color: green;
+}

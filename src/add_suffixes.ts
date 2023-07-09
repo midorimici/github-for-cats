@@ -1,4 +1,4 @@
-export const addSuffixes = () => {
+export const addSuffixes = async () => {
   const paragraphs = document.querySelectorAll('p[dir="auto"]');
   for (const p of paragraphs) {
     const textNodes = findTextNodes(p);
@@ -7,7 +7,8 @@ export const addSuffixes = () => {
         continue;
       }
 
-      textNode.textContent = suffixAddedText(textNode.textContent);
+      const { abSuffix, jaSuffix } = await fetchSuffixes();
+      textNode.textContent = suffixAddedText(textNode.textContent, abSuffix, jaSuffix);
     }
   }
 };
@@ -39,23 +40,38 @@ const findTextNodes = (node: Node): Node[] => {
   return foundNodes;
 };
 
+const storage = chrome.storage.local;
+
+const abSuffixKey = 'abSuffix';
+const jaSuffixKey = 'jaSuffix';
+const defaultAbSuffix = 'nya';
+const defaultJaSuffix = 'にゃ';
+
+type Suffixes = Record<typeof abSuffixKey | typeof jaSuffixKey, string>;
+
+const fetchSuffixes = async (): Promise<Suffixes> => {
+  const suffixes = await storage.get({
+    [abSuffixKey]: defaultAbSuffix,
+    [jaSuffixKey]: defaultJaSuffix,
+  });
+  return suffixes as Suffixes;
+};
+
 const ellipsisRegex = '\\.{2,}|…+';
 const lineEndCharsRegex = `([.。!！?？~～]|${ellipsisRegex})`;
 const lineEndRegex = `${lineEndCharsRegex}?$`;
 
-const enLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
-const enLineMiddleRegex = new RegExp(`(\\w)${lineEndCharsRegex} `, 'g');
-const enSuffix = 'nya';
+const abLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
+const abLineMiddleRegex = new RegExp(`(\\w)${lineEndCharsRegex} `, 'g');
 
 const jaChars = '\\p{scx=Hiragana}\\p{scx=Katakana}\\p{scx=Han}';
 const jaLineEndRegex = new RegExp(`([${jaChars}])${lineEndRegex}`, 'gu');
 const jaLineMiddleRegex = new RegExp(`([${jaChars}])${lineEndCharsRegex}([ ${jaChars}])`, 'gu');
-const jaSuffix = 'にゃ';
 
-const suffixAddedText = (text: string): string => {
+const suffixAddedText = (text: string, abSuffix: string, jaSuffix: string): string => {
   return text
-    .replace(enLineEndRegex, `$1 ${enSuffix}$2`)
-    .replace(enLineMiddleRegex, `$1 ${enSuffix}$2 `)
+    .replace(abLineEndRegex, `$1 ${abSuffix}$2`)
+    .replace(abLineMiddleRegex, `$1 ${abSuffix}$2 `)
     .replace(jaLineEndRegex, `$1${jaSuffix}$2`)
     .replace(jaLineMiddleRegex, `$1${jaSuffix}$2$3`);
 };
