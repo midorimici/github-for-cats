@@ -16,5 +16,8 @@
   },
   "skipUser": {
     "message": "Usernames of those whose avatar image replacements are skipped"
+  },
+  "regexSupported": {
+    "message": "Regular expression supported"
   }
 }
