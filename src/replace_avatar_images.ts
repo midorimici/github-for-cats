@@ -31,7 +31,7 @@ const findAvatarImages = (): Element[] => {
 const replace = async (images: Element[]) => {
   const imgMap: Map<string, string> = new Map();
   const userNames = await fetchSkipUsers();
-  const userNameRegex = new RegExp(userNames.join('|'));
+  const userNameRegex = new RegExp(`^Owner avatar$|${userNames.join('|')}`);
 
   for (const image of images) {
     const userName = userNameFromImage(image);
