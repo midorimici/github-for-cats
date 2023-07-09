@@ -15,6 +15,6 @@
     "message": "Japanese characters"
   },
   "skipUser": {
-    "message": "Usernames of those who are skipped"
+    "message": "Usernames of those whose avatar image replacements are skipped"
   }
 }
