@@ -3,21 +3,25 @@ const storage = chrome.storage.local;
 export const abSuffixKey = 'abSuffix';
 export const jaSuffixKey = 'jaSuffix';
 const skipUsersKey = 'skipUsers';
+const avatarImagesKey = 'avatarImages';
 
 const defaultAbSuffix = 'nya';
 const defaultJaSuffix = 'にゃ';
 const defaultSkipUsers = ['github-actions'];
+const defaultAvatarImages = {};
 
 type StorageData = {
   [abSuffixKey]: string;
   [jaSuffixKey]: string;
   [skipUsersKey]: string[];
+  [avatarImagesKey]: Record<string, string>;
 };
 
 const defaultValues: Readonly<StorageData> = {
   abSuffix: defaultAbSuffix,
   jaSuffix: defaultJaSuffix,
   skipUsers: defaultSkipUsers,
+  avatarImages: defaultAvatarImages,
 };
 
 export const fetchFromStorage = async <T extends keyof StorageData>(
