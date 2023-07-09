@@ -4,6 +4,7 @@
     "build": "webpack"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.240",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/webpack": "^5.28.1",
     "copy-webpack-plugin": "^11.0.0",
