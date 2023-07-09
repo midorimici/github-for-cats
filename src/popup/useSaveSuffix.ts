@@ -11,6 +11,7 @@ export const useSaveSuffix = (
   suffixKey: string
 ): UseSaveSuffixReturnType => {
   const [isShowingDoneIcon, setIsShowingDoneIcon] = useState<boolean>(false);
+  const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
 
   const handleBlur: FocusEventHandler<HTMLInputElement> = useCallback(
     (e) => {
@@ -20,13 +21,16 @@ export const useSaveSuffix = (
         return;
       }
 
+      clearTimeout(timeoutID);
+
       setSuffix(value);
       chrome.storage.local.set({ [suffixKey]: value });
 
       setIsShowingDoneIcon(true);
-      setTimeout(() => {
+      const id = setTimeout(() => {
         setIsShowingDoneIcon(false);
       }, 3000);
+      setTimeoutID(id);
     },
     [suffix, setSuffix, suffixKey]
   );
