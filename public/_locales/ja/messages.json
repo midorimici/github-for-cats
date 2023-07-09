@@ -8,7 +8,10 @@
   "suffix": {
     "message": "語尾"
   },
-  "defaultSuffix": {
-    "message": "にゃ"
+  "alphabets": {
+    "message": "英字"
+  },
+  "japanese": {
+    "message": "日本語"
   }
 }

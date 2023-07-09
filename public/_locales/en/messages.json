@@ -8,7 +8,10 @@
   "suffix": {
     "message": "Suffix"
   },
-  "defaultSuffix": {
-    "message": "nya"
+  "alphabets": {
+    "message": "Alphabet characters"
+  },
+  "japanese": {
+    "message": "Japanese characters"
   }
 }
