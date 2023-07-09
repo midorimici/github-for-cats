@@ -10,11 +10,17 @@ input {
   background-color: transparent;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6 * $size;
+}
+
 .title {
   font-size: 1.6rem;
 }
 
-.suffix-config-container {
+.config-container {
   display: flex;
   flex-direction: column;
   gap: 2 * $size;

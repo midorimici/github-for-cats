@@ -16,7 +16,7 @@ export const SuffixConfigSection: React.FC = () => {
   useFetchSuffix(setAbSuffix, setJaSuffix);
 
   return (
-    <section className="suffix-config-container">
+    <section className="config-container">
       {suffixLabel}
       <SuffixForm
         label={abLabel}

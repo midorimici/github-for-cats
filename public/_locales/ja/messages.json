@@ -13,5 +13,8 @@
   },
   "japanese": {
     "message": "日本語"
+  },
+  "skipUser": {
+    "message": "対象外にするユーザ名"
   }
 }

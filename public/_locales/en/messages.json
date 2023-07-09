@@ -13,5 +13,8 @@
   },
   "japanese": {
     "message": "Japanese characters"
+  },
+  "skipUser": {
+    "message": "Usernames of those who are skipped"
   }
 }
