@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { abSuffixKey, jaSuffixKey, useFetchSuffix } from './useFetchSuffix';
+import { useFetchSuffix } from './useFetchSuffix';
 import { useSaveSuffix } from './useSaveSuffix';
+import { abSuffixKey, jaSuffixKey } from '../../lib/storage';
 
 const t = chrome.i18n.getMessage;
 
@@ -38,7 +39,7 @@ type SuffixFormProps = {
   label: string;
   suffix: string;
   setSuffix: (suffix: string) => void;
-  suffixKey: string;
+  suffixKey: typeof abSuffixKey | typeof jaSuffixKey;
 };
 
 const SuffixForm: React.FC<SuffixFormProps> = ({ label, suffix, setSuffix, suffixKey }) => {

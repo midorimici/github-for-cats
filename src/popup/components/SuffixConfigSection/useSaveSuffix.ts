@@ -1,4 +1,5 @@
 import { useCallback, useState, type FocusEventHandler } from 'react';
+import { abSuffixKey, jaSuffixKey, saveToStorage } from '../../lib/storage';
 
 type UseSaveSuffixReturnType = {
   handleBlur: FocusEventHandler<HTMLInputElement>;
@@ -8,7 +9,7 @@ type UseSaveSuffixReturnType = {
 export const useSaveSuffix = (
   suffix: string,
   setSuffix: (suffix: string) => void,
-  suffixKey: string
+  suffixKey: typeof abSuffixKey | typeof jaSuffixKey
 ): UseSaveSuffixReturnType => {
   const [isShowingDoneIcon, setIsShowingDoneIcon] = useState<boolean>(false);
   const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
@@ -24,7 +25,7 @@ export const useSaveSuffix = (
       clearTimeout(timeoutID);
 
       setSuffix(value);
-      chrome.storage.local.set({ [suffixKey]: value });
+      saveToStorage(suffixKey, value);
 
       setIsShowingDoneIcon(true);
       const id = setTimeout(() => {
