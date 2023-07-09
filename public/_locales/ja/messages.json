@@ -16,5 +16,8 @@
   },
   "skipUser": {
     "message": "アバター画像の置き換えをスキップするユーザ名"
+  },
+  "regexSupported": {
+    "message": "正規表現対応"
   }
 }

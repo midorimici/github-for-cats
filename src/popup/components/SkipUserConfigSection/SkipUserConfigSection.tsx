@@ -8,6 +8,7 @@ const t = chrome.i18n.getMessage;
 
 export const SkipUserConfigSection: React.FC = () => {
   const skipUserLabel = t('skipUser');
+  const regexSupportedLabel = t('regexSupported');
 
   const { userNames, handleKeyDown, deleteUserName } = useSkipUsers();
 
@@ -16,7 +17,7 @@ export const SkipUserConfigSection: React.FC = () => {
       <label className="label">
         {skipUserLabel}
         <div className="inline-form">
-          <input type="text" onKeyDown={handleKeyDown} />
+          <input type="text" placeholder={regexSupportedLabel} onKeyDown={handleKeyDown} />
         </div>
       </label>
       <UserNameList userNames={userNames} deleteUserName={deleteUserName} />
