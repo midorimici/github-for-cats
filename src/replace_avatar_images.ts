@@ -1,5 +1,5 @@
 import { catImageURL } from './api';
-import { fetchFromStorage } from './lib/storage';
+import { fetchFromStorage, saveToStorage } from './lib/storage';
 
 export const replaceAvatarImages = () => {
   const images = findAvatarImages();
@@ -29,8 +29,8 @@ const findAvatarImages = (): Element[] => {
 };
 
 const replace = async (images: Element[]) => {
-  const imgMap: Map<string, string> = new Map();
-  const userNames = await fetchSkipUsers();
+  let isMapUpdated = false;
+  const [imgMap, userNames] = await Promise.all([fetchImageMap(), fetchSkipUsers()]);
   const userNameRegex = new RegExp(`^(?:Owner avatar|${userNames.join('|')})$`);
 
   for (const image of images) {
@@ -45,10 +45,21 @@ const replace = async (images: Element[]) => {
     } else {
       newImageURL = await catImageURL(true);
       imgMap.set(userName, newImageURL);
+      isMapUpdated = true;
     }
     image.setAttribute('src', newImageURL);
     image.setAttribute('style', 'object-fit: cover;');
   }
+
+  if (isMapUpdated) {
+    saveToStorage('avatarImages', Object.fromEntries(imgMap));
+  }
+};
+
+const fetchImageMap = async (): Promise<Map<string, string>> => {
+  const { avatarImages } = await fetchFromStorage(['avatarImages']);
+  const mp = new Map(Object.entries(avatarImages));
+  return mp;
 };
 
 const fetchSkipUsers = async (): Promise<string[]> => {

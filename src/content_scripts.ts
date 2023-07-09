@@ -26,3 +26,13 @@ const setupObserver = () => {
 
 main();
 setupObserver();
+
+chrome.runtime.onMessage.addListener(
+  (msg: { refreshImages: boolean }, _, sendResponse: (response: boolean) => void) => {
+    if (msg.refreshImages === true) {
+      replaceAvatarImages();
+      sendResponse(true);
+    }
+    sendResponse(false);
+  }
+);

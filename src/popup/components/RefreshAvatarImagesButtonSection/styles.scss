@@ -1,0 +1,24 @@
+@import '/src/popup/popup.scss';
+
+.button-container {
+  text-align: right;
+}
+
+.refresh-button {
+  min-width: 140px;
+  height: 36px;
+  border-radius: 2 * $size;
+  background-color: $light-grey;
+  border: none;
+  padding: 2 * $size;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  &:hover {
+    background-color: $grey;
+  }
+  &:disabled {
+    cursor: wait;
+    background-color: $light-grey;
+  }
+}
