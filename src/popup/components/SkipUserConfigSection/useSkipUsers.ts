@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { fetchFromStorage, saveToStorage } from '../../lib/storage';
+import { fetchFromStorage, saveToStorage } from '../../../lib/storage';
 
 type UseSkipUsersReturnType = {
   userNames: string[];
