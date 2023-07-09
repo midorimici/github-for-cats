@@ -4,5 +4,11 @@
   },
   "configurations": {
     "message": "設定"
+  },
+  "suffix": {
+    "message": "語尾"
+  },
+  "defaultSuffix": {
+    "message": "にゃ"
   }
 }

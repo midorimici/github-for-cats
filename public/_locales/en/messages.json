@@ -4,5 +4,11 @@
   },
   "configurations": {
     "message": "Configurations"
+  },
+  "suffix": {
+    "message": "Suffix"
+  },
+  "defaultSuffix": {
+    "message": "nya"
   }
 }

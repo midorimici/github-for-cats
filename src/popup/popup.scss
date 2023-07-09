@@ -1,0 +1,24 @@
+$primary-color: orange;
+$size: 4px;
+
+input {
+  border: solid 1px #aaa;
+  border-radius: 2 * $size;
+  padding: 2 * $size;
+  outline: solid 1px transparent;
+  transition: border-color, outline-color 0.4s;
+  &:focus-visible {
+    border-color: $primary-color;
+    outline-color: $primary-color;
+  }
+}
+
+.title {
+  font-size: 1.6rem;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 2 * $size;
+}
