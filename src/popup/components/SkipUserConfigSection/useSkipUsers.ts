@@ -1,6 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
-
-const defaultUserNameSet = new Set(['github-actions']);
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { fetchFromStorage, saveToStorage } from '../../lib/storage';
 
 type UseSkipUsersReturnType = {
   userNames: string[];
@@ -9,8 +8,22 @@ type UseSkipUsersReturnType = {
 };
 
 export const useSkipUsers = (): UseSkipUsersReturnType => {
-  const [userNameSet, setUserNameSet] = useState<Set<string>>(defaultUserNameSet);
+  const [userNameSet, setUserNameSet] = useState<Set<string>>(new Set());
   const userNames = useMemo(() => [...userNameSet], [userNameSet]);
+
+  const fetch = useCallback(() => {
+    fetchFromStorage(['skipUsers']).then(({ skipUsers }) => {
+      setUserNameSet(new Set(skipUsers));
+    });
+  }, []);
+
+  useEffect(() => {
+    fetch();
+  }, [fetch]);
+
+  useEffect(() => {
+    saveToStorage('skipUsers', userNames);
+  }, [userNames]);
 
   const addUserName = useCallback(
     (name: string) => {
