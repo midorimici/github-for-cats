@@ -38,3 +38,7 @@ export const fetchFromStorage = async <T extends keyof StorageData>(
 export const saveToStorage = <T extends keyof StorageData>(key: T, value: StorageData[T]) => {
   storage.set({ [key]: value });
 };
+
+export const removeFromStorage = async (key: keyof StorageData): Promise<void> => {
+  return await storage.remove(key);
+};
