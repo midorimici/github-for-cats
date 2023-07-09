@@ -7,7 +7,7 @@ const avatarImagesKey = 'avatarImages';
 
 const defaultAbSuffix = 'nya';
 const defaultJaSuffix = 'にゃ';
-const defaultSkipUsers = ['github-actions'];
+const defaultSkipUsers = ['github-actions(?:\\[bot\\])?'];
 const defaultAvatarImages = {};
 
 type StorageData = {
