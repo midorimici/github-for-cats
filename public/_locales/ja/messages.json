@@ -13,5 +13,8 @@
   },
   "japanese": {
     "message": "日本語"
+  },
+  "skipUser": {
+    "message": "アバター画像の置き換えをスキップするユーザ名"
   }
 }

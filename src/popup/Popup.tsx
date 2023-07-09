@@ -1,3 +1,4 @@
+import { SkipUserConfigSection } from './components/SkipUserConfigSection';
 import { SuffixConfigSection } from './components/SuffixConfigSection';
 import './popup.scss';
 
@@ -7,9 +8,10 @@ export const Popup = () => {
   const configLabel = t('configurations');
 
   return (
-    <div>
+    <div className="container">
       <h1 className="title">{configLabel}</h1>
       <SuffixConfigSection />
+      <SkipUserConfigSection />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { catImageURL } from './api';
+import { fetchFromStorage } from './lib/storage';
 
 export const replaceAvatarImages = () => {
   const images = findAvatarImages();
@@ -29,10 +30,12 @@ const findAvatarImages = (): Element[] => {
 
 const replace = async (images: Element[]) => {
   const imgMap: Map<string, string> = new Map();
+  const userNames = await fetchSkipUsers();
+  const userNameRegex = new RegExp(userNames.join('|'));
 
   for (const image of images) {
     const userName = userNameFromImage(image);
-    if (userName === null) {
+    if (userName === null || userNameRegex.test(userName)) {
       continue;
     }
 
@@ -46,6 +49,11 @@ const replace = async (images: Element[]) => {
     image.setAttribute('src', newImageURL);
     image.setAttribute('style', 'object-fit: cover;');
   }
+};
+
+const fetchSkipUsers = async (): Promise<string[]> => {
+  const { skipUsers } = await fetchFromStorage(['skipUsers']);
+  return skipUsers;
 };
 
 const userNameFromImage = (image: Element): string | null => {

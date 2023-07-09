@@ -1,3 +1,5 @@
+import { fetchFromStorage } from './lib/storage';
+
 export const addSuffixes = async () => {
   const paragraphs = document.querySelectorAll('p[dir="auto"]');
   for (const p of paragraphs) {
@@ -40,21 +42,9 @@ const findTextNodes = (node: Node): Node[] => {
   return foundNodes;
 };
 
-const storage = chrome.storage.local;
-
-const abSuffixKey = 'abSuffix';
-const jaSuffixKey = 'jaSuffix';
-const defaultAbSuffix = 'nya';
-const defaultJaSuffix = 'にゃ';
-
-type Suffixes = Record<typeof abSuffixKey | typeof jaSuffixKey, string>;
-
-const fetchSuffixes = async (): Promise<Suffixes> => {
-  const suffixes = await storage.get({
-    [abSuffixKey]: defaultAbSuffix,
-    [jaSuffixKey]: defaultJaSuffix,
-  });
-  return suffixes as Suffixes;
+const fetchSuffixes = async () => {
+  const suffixes = await fetchFromStorage(['abSuffix', 'jaSuffix']);
+  return suffixes;
 };
 
 const ellipsisRegex = '\\.{2,}|…+';
