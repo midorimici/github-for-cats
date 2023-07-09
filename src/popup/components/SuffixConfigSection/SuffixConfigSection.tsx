@@ -3,7 +3,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useFetchSuffix } from './useFetchSuffix';
 import { useSaveSuffix } from './useSaveSuffix';
-import { abSuffixKey, jaSuffixKey } from '../../../lib/storage';
+import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
 
 const t = chrome.i18n.getMessage;
 

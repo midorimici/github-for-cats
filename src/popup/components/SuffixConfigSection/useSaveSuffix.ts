@@ -1,5 +1,5 @@
 import { useCallback, useState, type FocusEventHandler } from 'react';
-import { abSuffixKey, jaSuffixKey, saveToStorage } from '../../../lib/storage';
+import { abSuffixKey, jaSuffixKey, saveToStorage } from '~/lib/storage';
 
 type UseSaveSuffixReturnType = {
   handleBlur: FocusEventHandler<HTMLInputElement>;

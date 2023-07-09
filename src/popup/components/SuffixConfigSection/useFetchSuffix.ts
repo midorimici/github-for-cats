@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { fetchFromStorage } from '../../../lib/storage';
+import { fetchFromStorage } from '~/lib/storage';
 
 type SetSuffix = (suffix: string) => void;
 
