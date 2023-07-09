@@ -12,10 +12,10 @@
     "128": "icons/icon128.png"
   },
   "permissions": ["storage"],
-  "host_permissions": ["https://github.com/*/*/pull/*"],
+  "host_permissions": ["https://github.com"],
   "content_scripts": [
     {
-      "matches": ["https://github.com/*/*/pull/*"],
+      "matches": ["https://github.com/*"],
       "js": ["content_scripts.js"],
       "run_at": "document_end"
     }
