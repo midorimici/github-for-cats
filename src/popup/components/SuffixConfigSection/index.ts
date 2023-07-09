@@ -1,0 +1,1 @@
+export { SuffixConfigSection } from './SuffixConfigSection';
