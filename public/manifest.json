@@ -1,9 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Peaceful GitHub pull request",
-  "short_name": "Peaceful PR",
+  "name": "GitHub for cats",
   "description": "__MSG_ext_desc__",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "midorimici",
   "default_locale": "ja",
   "icons": {

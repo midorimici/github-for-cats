@@ -1,4 +1,4 @@
-## Peacefull GitHub pull request
+## GitHub for cats
 
-- Add sentence suffixes and cat images to GitHub PR comments
+- Add sentence suffixes and cat images to GitHub comments
 - Replace user avatars with cat images
