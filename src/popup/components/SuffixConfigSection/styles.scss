@@ -1,5 +1,14 @@
 @import '/src/popup/popup.scss';
 
+.config-title-container {
+  display: flex;
+  align-items: center;
+  gap: 2 * $size;
+  margin-bottom: 2 * $size;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
 .icon-container {
   width: 4 * $size;
   display: flex;

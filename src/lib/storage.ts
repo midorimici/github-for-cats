@@ -11,6 +11,7 @@ const defaultSkipUsers = ['github-actions(?:\\[bot\\])?'];
 const defaultAvatarImages = {};
 
 type StorageData = {
+  isSuffixEnabled: boolean;
   [abSuffixKey]: string;
   [jaSuffixKey]: string;
   [skipUsersKey]: string[];
@@ -18,6 +19,7 @@ type StorageData = {
 };
 
 const defaultValues: Readonly<StorageData> = {
+  isSuffixEnabled: true,
   abSuffix: defaultAbSuffix,
   jaSuffix: defaultJaSuffix,
   skipUsers: defaultSkipUsers,

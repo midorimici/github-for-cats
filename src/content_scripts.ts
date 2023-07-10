@@ -1,9 +1,13 @@
 import { addCatImages } from './add_images';
 import { addSuffixes } from './add_suffixes';
+import { fetchFromStorage } from './lib/storage';
 import { replaceAvatarImages } from './replace_avatar_images';
 
-const main = () => {
-  addSuffixes();
+const main = async () => {
+  const { isSuffixEnabled } = await fetchFromStorage(['isSuffixEnabled']);
+  if (isSuffixEnabled) {
+    addSuffixes();
+  }
   replaceAvatarImages();
   addCatImages();
 };
