@@ -15,7 +15,7 @@ export const useRefreshImages = (): UseRefreshImagesReturnType => {
     await removeFromStorage('avatarImages');
 
     const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-    if (tab.id !== undefined) {
+    if (tab !== undefined && tab.id !== undefined && tab.url?.startsWith('https://github.com')) {
       await chrome.tabs.sendMessage(tab.id, { refreshImages: true });
     }
 
