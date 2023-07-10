@@ -45,13 +45,22 @@ const replace = async (images: Element[]) => {
     const URLs = await imageURLs(userCount);
 
     for (const [i, userName] of [...imageNeededUserNameSet].entries()) {
+      if (i >= URLs.length) {
+        break;
+      }
+
       imgMap.set(userName, URLs[i]);
     }
   }
 
   for (const [userName, images] of pageUserNameImageMap) {
     for (const image of images) {
-      image.setAttribute('src', imgMap.get(userName) ?? '');
+      const URL = imgMap.get(userName);
+      if (URL === undefined) {
+        continue;
+      }
+
+      image.setAttribute('src', URL);
       image.setAttribute('style', 'object-fit: cover;');
     }
   }
