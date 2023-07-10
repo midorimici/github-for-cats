@@ -12,6 +12,7 @@ const defaultAvatarImages = {};
 
 export type StorageData = {
   isSuffixEnabled: boolean;
+  isAvatarImageReplacementEnabled: boolean;
   [abSuffixKey]: string;
   [jaSuffixKey]: string;
   [skipUsersKey]: string[];
@@ -20,6 +21,7 @@ export type StorageData = {
 
 const defaultValues: Readonly<StorageData> = {
   isSuffixEnabled: true,
+  isAvatarImageReplacementEnabled: true,
   abSuffix: defaultAbSuffix,
   jaSuffix: defaultJaSuffix,
   skipUsers: defaultSkipUsers,
