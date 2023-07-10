@@ -1,6 +1,7 @@
 import { t } from '~/lib/i18n';
-import { AvatarImageReplacementSection } from './components/domain/AvatarImageReplacementSection';
 import { SuffixConfigSection } from './components/domain/SuffixConfigSection';
+import { AvatarImageReplacementSection } from './components/domain/AvatarImageReplacementSection';
+import { AddImagesSection } from './components/domain/AddImagesSection';
 import './popup.scss';
 
 export const Popup = () => {
@@ -11,6 +12,7 @@ export const Popup = () => {
       <h1 className="title">{configLabel}</h1>
       <SuffixConfigSection />
       <AvatarImageReplacementSection />
+      <AddImagesSection />
     </div>
   );
 };

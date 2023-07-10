@@ -25,5 +25,8 @@
   },
   "refreshAvatarImages": {
     "message": "アバター画像を更新"
+  },
+  "addImagesToComments": {
+    "message": "コメントに画像を追加"
   }
 }
