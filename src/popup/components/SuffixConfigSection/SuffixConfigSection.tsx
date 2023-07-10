@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useFetchSuffix } from './useFetchSuffix';
 import { useSaveSuffix } from './useSaveSuffix';
 import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
+import './styles.scss';
 
 const t = chrome.i18n.getMessage;
 
