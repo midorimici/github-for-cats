@@ -17,7 +17,12 @@ export const SkipUserConfigSection: React.FC = () => {
       <label className="label">
         {skipUserLabel}
         <div className="inline-form">
-          <input type="text" placeholder={regexSupportedLabel} onKeyDown={handleKeyDown} />
+          <input
+            type="text"
+            placeholder={regexSupportedLabel}
+            maxLength={100}
+            onKeyDown={handleKeyDown}
+          />
         </div>
       </label>
       <UserNameList userNames={userNames} deleteUserName={deleteUserName} />
