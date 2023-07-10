@@ -1,4 +1,4 @@
-import { fetchFromStorage } from './lib/storage';
+import { fetchFromStorage } from '../lib/storage';
 
 export const addSuffixes = async () => {
   const paragraphs = document.querySelectorAll('p[dir="auto"]');

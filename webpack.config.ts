@@ -6,7 +6,7 @@ const config = (): Configuration => {
   return {
     mode: 'production',
     entry: {
-      content_scripts: path.join(__dirname, 'src', 'content_scripts.ts'),
+      content_scripts: path.join(__dirname, 'src', 'contentScripts', 'main.ts'),
       popup: path.join(__dirname, 'src', 'popup', 'index.tsx'),
     },
     output: {
