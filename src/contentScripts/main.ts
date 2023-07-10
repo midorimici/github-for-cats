@@ -1,7 +1,7 @@
-import { addCatImages } from './add_images';
-import { addSuffixes } from './add_suffixes';
-import { fetchFromStorage } from './lib/storage';
-import { replaceAvatarImages } from './replace_avatar_images';
+import { addCatImages } from './addImages';
+import { addSuffixes } from './addSuffixes';
+import { fetchFromStorage } from '../lib/storage';
+import { replaceAvatarImages } from './replaceAvatarImages';
 
 const main = async () => {
   const { isSuffixEnabled, isAvatarImageReplacementEnabled, isAddImagesToCommentsEnabled } =

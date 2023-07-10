@@ -1,5 +1,5 @@
 import { catImageURLs } from './api';
-import { fetchFromStorage, saveToStorage } from './lib/storage';
+import { fetchFromStorage, saveToStorage } from '../lib/storage';
 
 export const replaceAvatarImages = () => {
   const images = findAvatarImages();
