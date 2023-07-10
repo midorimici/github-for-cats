@@ -34,6 +34,15 @@ input {
   gap: 2 * $size;
 }
 
+.config-title-container {
+  display: flex;
+  align-items: center;
+  gap: 2 * $size;
+  margin-bottom: 2 * $size;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
 .label {
   display: flex;
   flex-direction: column;

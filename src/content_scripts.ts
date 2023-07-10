@@ -4,11 +4,18 @@ import { fetchFromStorage } from './lib/storage';
 import { replaceAvatarImages } from './replace_avatar_images';
 
 const main = async () => {
-  const { isSuffixEnabled } = await fetchFromStorage(['isSuffixEnabled']);
+  const { isSuffixEnabled, isAvatarImageReplacementEnabled } = await fetchFromStorage([
+    'isSuffixEnabled',
+    'isAvatarImageReplacementEnabled',
+  ]);
   if (isSuffixEnabled) {
     addSuffixes();
   }
-  replaceAvatarImages();
+
+  if (isAvatarImageReplacementEnabled) {
+    replaceAvatarImages();
+  }
+
   addCatImages();
 };
 

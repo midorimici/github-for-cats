@@ -1,5 +1,4 @@
-import { RefreshAvatarImagesButtonSection } from './components/RefreshAvatarImagesButtonSection';
-import { SkipUserConfigSection } from './components/SkipUserConfigSection';
+import { AvatarImageReplacementSection } from './components/AvatarImageReplacementSection';
 import { SuffixConfigSection } from './components/SuffixConfigSection';
 import './popup.scss';
 
@@ -12,8 +11,7 @@ export const Popup = () => {
     <div className="container">
       <h1 className="title">{configLabel}</h1>
       <SuffixConfigSection />
-      <SkipUserConfigSection />
-      <RefreshAvatarImagesButtonSection />
+      <AvatarImageReplacementSection />
     </div>
   );
 };
