@@ -1,4 +1,4 @@
-import { catImageURL } from './api';
+import { catImageURLs } from './api';
 import { fetchFromStorage, saveToStorage } from './lib/storage';
 
 export const replaceAvatarImages = () => {
@@ -28,30 +28,35 @@ const findAvatarImages = (): Element[] => {
   return images;
 };
 
+const per = 10;
+
 const replace = async (images: Element[]) => {
-  let isMapUpdated = false;
   const [imgMap, userNames] = await Promise.all([fetchImageMap(), fetchSkipUsers()]);
-  const userNameRegex = new RegExp(`^(?:Owner avatar|${userNames.join('|')})$`);
 
-  for (const image of images) {
-    const userName = userNameFromImage(image);
-    if (userName === null || userNameRegex.test(userName)) {
-      continue;
-    }
+  const skipUserNameRegex = new RegExp(`^(?:Owner avatar|${userNames.join('|')})$`);
+  const pageUserNameImageMap = userNameImageMap(images, skipUserNameRegex);
 
-    let newImageURL: string;
-    if (imgMap.has(userName)) {
-      newImageURL = imgMap.get(userName)!;
-    } else {
-      newImageURL = await catImageURL(true);
-      imgMap.set(userName, newImageURL);
-      isMapUpdated = true;
+  const pageUserNameSet = new Set(pageUserNameImageMap.keys());
+  const storedUserNameSet = new Set(imgMap.keys());
+  const imageNeededUserNameSet = diff(pageUserNameSet, storedUserNameSet);
+
+  const userCount = imageNeededUserNameSet.size;
+  if (userCount > 0) {
+    const URLs = await imageURLs(userCount);
+
+    for (const [i, userName] of [...imageNeededUserNameSet].entries()) {
+      imgMap.set(userName, URLs[i]);
     }
-    image.setAttribute('src', newImageURL);
-    image.setAttribute('style', 'object-fit: cover;');
   }
 
-  if (isMapUpdated) {
+  for (const [userName, images] of pageUserNameImageMap) {
+    for (const image of images) {
+      image.setAttribute('src', imgMap.get(userName) ?? '');
+      image.setAttribute('style', 'object-fit: cover;');
+    }
+  }
+
+  if (userCount > 0) {
     saveToStorage('avatarImages', Object.fromEntries(imgMap));
   }
 };
@@ -67,6 +72,26 @@ const fetchSkipUsers = async (): Promise<string[]> => {
   return skipUsers;
 };
 
+type UserNameImageMap = Map<string, Set<Element>>;
+
+const userNameImageMap = (images: Element[], skipUserNameRegex: RegExp): UserNameImageMap => {
+  const mp: UserNameImageMap = new Map();
+  for (const image of images) {
+    const userName = userNameFromImage(image);
+    if (userName === null || skipUserNameRegex.test(userName)) {
+      continue;
+    }
+
+    const s = mp.get(userName);
+    if (s === undefined) {
+      mp.set(userName, new Set([image]));
+    } else {
+      s.add(image);
+    }
+  }
+  return mp;
+};
+
 const userNameFromImage = (image: Element): string | null => {
   const altText = image.getAttribute('alt');
   if (altText === null || altText === '') {
@@ -74,4 +99,23 @@ const userNameFromImage = (image: Element): string | null => {
   }
 
   return altText.replace('@', '');
+};
+
+const diff = <T>(a: Set<T>, b: Set<T>): Set<T> => {
+  let d = new Set(a);
+  for (const e of b) {
+    d.delete(e);
+  }
+  return d;
+};
+
+const imageURLs = async (userCount: number): Promise<string[]> => {
+  const APICallTime = Math.floor(userCount / per) + 1;
+  const URLPromises: Promise<string[]>[] = [];
+  for (let i = 0; i < APICallTime; i++) {
+    const count = i === APICallTime - 1 ? userCount - per * i : per;
+    const URLs = catImageURLs(count, true);
+    URLPromises.push(URLs);
+  }
+  return (await Promise.all(URLPromises)).flat();
 };
