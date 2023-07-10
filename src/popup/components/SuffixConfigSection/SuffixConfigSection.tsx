@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { faCircle } from '@fortawesome/free-regular-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useFetchSuffix } from './useFetchSuffix';
 import { useSaveSuffix } from './useSaveSuffix';
 import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
 import './styles.scss';
 import { useIsEnabled } from './useIsEnabled';
+import { CheckCircle } from '~/popup/shared/CheckCircle';
 
 const t = chrome.i18n.getMessage;
 
@@ -21,17 +21,10 @@ export const SuffixConfigSection: React.FC = () => {
 
   const { isEnabled, toggle } = useIsEnabled();
 
-  let Icon: () => JSX.Element;
-  if (isEnabled) {
-    Icon = () => <FontAwesomeIcon icon={faCheckCircle} color="green" aria-checked="true" />;
-  } else {
-    Icon = () => <FontAwesomeIcon icon={faCircle} aria-checked="false" />;
-  }
-
   return (
     <section className="config-container">
       <label className="config-title-container" onClick={toggle}>
-        <Icon />
+        <CheckCircle isChecked={isEnabled} />
         {suffixLabel}
       </label>
       {isEnabled && (
