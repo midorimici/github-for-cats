@@ -6,8 +6,7 @@ import React from 'react';
 import { useIsEnabled } from '~/popup/components/hooks/useIsEnabled';
 import { CheckCircle } from '~/popup/shared/CheckCircle';
 import { useRefreshImages } from './useRefreshImages';
-
-const t = chrome.i18n.getMessage;
+import { t } from '~/lib/i18n';
 
 export const AvatarImageReplacementSection: React.FC = () => {
   const replaceImageLabel = t('replaceAvatarImages');

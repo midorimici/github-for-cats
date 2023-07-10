@@ -3,12 +3,11 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useFetchSuffix } from './useFetchSuffix';
 import { useSaveSuffix } from './useSaveSuffix';
+import { t } from '~/lib/i18n';
 import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
 import './styles.scss';
 import { CheckCircle } from '~/popup/shared/CheckCircle';
 import { useIsEnabled } from '~/popup/components/hooks/useIsEnabled';
-
-const t = chrome.i18n.getMessage;
 
 export const SuffixConfigSection: React.FC = () => {
   const suffixLabel = t('suffix');
