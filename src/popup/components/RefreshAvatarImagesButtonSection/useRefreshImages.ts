@@ -13,14 +13,18 @@ export const useRefreshImages = (): UseRefreshImagesReturnType => {
     setIsLoading(true);
 
     await removeFromStorage('avatarImages');
-
-    const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-    if (tab.id !== undefined) {
-      await chrome.tabs.sendMessage(tab.id, { refreshImages: true });
-    }
+    await refreshImages();
 
     setIsLoading(false);
   }, [isLoading, setIsLoading]);
+
+  const refreshImages = useCallback(async () => {
+    const ct = chrome.tabs;
+    const [tab] = await ct.query({ active: true, lastFocusedWindow: true });
+    if (tab !== undefined && tab.id !== undefined && tab.url?.startsWith('https://github.com')) {
+      await ct.sendMessage(tab.id, { refreshImages: true });
+    }
+  }, []);
 
   return { isLoading, handleClickRefreshButton };
 };
