@@ -1,14 +1,35 @@
+const maxTryCount = 5;
+
+type ImageData = {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+};
+
+type Response = ImageData[];
+
 export const catImageURLs = async (count: number, isAvatar: boolean): Promise<string[]> => {
   let queryParams: string;
+  let response: Response = [];
   if (isAvatar) {
     queryParams = `limit=${count}&mime_types=png,jpg`;
+    response = await fetchAPI(queryParams);
   } else {
-    const size = randomSize();
-    const categoryID = randomCategoryID();
-    queryParams = `limit=${count}&size=${size}&category_ids=${categoryID}`;
+    let needCount = count;
+    for (let i = 0; i < maxTryCount; i++) {
+      const size = randomSize();
+      const categoryID = randomCategoryID();
+      queryParams = `limit=${needCount}&size=${size}&category_ids=${categoryID}`;
+      response = await fetchAPI(queryParams);
+      if (response.length >= needCount) {
+        break;
+      }
+
+      needCount = count - response.length;
+    }
   }
 
-  const response = await fetchAPI(queryParams);
   const URLs = response.map((img: ImageData) => img.url);
   return URLs;
 };
@@ -29,15 +50,6 @@ const randomCategoryID = (): number => {
 };
 
 const theCatAPIURL = 'https://api.thecatapi.com/v1/images/search';
-
-type ImageData = {
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-};
-
-type Response = ImageData[];
 
 const fetchAPI = async (queryParams: string): Promise<Response> => {
   const response = await fetch(`${theCatAPIURL}?${queryParams}`);

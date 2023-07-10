@@ -21,6 +21,10 @@ export const addCatImages = async () => {
   const images = (await Promise.all(imagePromises)).flat();
 
   for (let i = 0; i < commentCount; i++) {
+    if (i >= images.length) {
+      break;
+    }
+
     comments[i].appendChild(images[i]);
   }
 };
