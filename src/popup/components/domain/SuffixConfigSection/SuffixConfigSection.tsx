@@ -6,8 +6,8 @@ import { useSaveSuffix } from './useSaveSuffix';
 import { t } from '~/lib/i18n';
 import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
 import './styles.scss';
-import { CheckCircle } from '~/popup/shared/CheckCircle';
-import { useIsEnabled } from '~/popup/components/hooks/useIsEnabled';
+import { CheckCircle } from '~/popup/components/shared/CheckCircle';
+import { useIsEnabled } from '~/popup/components/domain/hooks/useIsEnabled';
 
 export const SuffixConfigSection: React.FC = () => {
   const suffixLabel = t('suffix');
