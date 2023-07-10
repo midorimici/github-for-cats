@@ -1,15 +1,23 @@
-export const catImageURL = async (isAvatar: boolean): Promise<string> => {
+export const catImageURLs = async (count: number, isAvatar: boolean): Promise<string[]> => {
   let queryParams: string;
   if (isAvatar) {
-    queryParams = 'mime_types=png,jpg';
+    queryParams = `limit=${count}&mime_types=png,jpg`;
   } else {
+    const size = randomSize();
     const categoryID = randomCategoryID();
-    queryParams = `size=small&category_ids=${categoryID}`;
+    queryParams = `limit=${count}&size=${size}&category_ids=${categoryID}`;
   }
 
   const response = await fetchAPI(queryParams);
-  const URL = response[0].url;
-  return URL;
+  const URLs = response.map((img: ImageData) => img.url);
+  return URLs;
+};
+
+const sizeOption = ['small', 'med', 'full'] as const;
+
+const randomSize = (): (typeof sizeOption)[number] => {
+  const index = Math.floor(3 * Math.random());
+  return sizeOption[index];
 };
 
 const availableCategoryIDs = [1, 4, 5, 7, 14, 15];

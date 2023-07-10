@@ -1,15 +1,24 @@
-import { catImageURL } from './api';
+import { catImageURLs } from './api';
+
+const per = 10;
 
 export const addCatImages = async () => {
   const comments = targetComments();
   const commentCount = comments.length;
 
-  const imagePromises: Promise<Element>[] = [];
-  for (let i = 0; i < commentCount; i++) {
-    const image = createImage();
-    imagePromises.push(image);
+  if (commentCount === 0) {
+    return;
   }
-  const images = await Promise.all(imagePromises);
+
+  const APICallTime = Math.floor(commentCount / per) + 1;
+
+  const imagePromises: Promise<Element[]>[] = [];
+  for (let i = 0; i < APICallTime; i++) {
+    const count = i === APICallTime - 1 ? commentCount - per * i : per;
+    const images = createImages(count);
+    imagePromises.push(images);
+  }
+  const images = (await Promise.all(imagePromises)).flat();
 
   for (let i = 0; i < commentCount; i++) {
     comments[i].appendChild(images[i]);
@@ -35,10 +44,19 @@ const hasImageAsLastChild = (comment: Element): boolean => {
   return comment.lastElementChild?.lastElementChild?.lastElementChild?.nodeName === 'IMG';
 };
 
-const createImage = async (): Promise<Element> => {
+const createImages = async (count: number): Promise<Element[]> => {
+  const imageURLs = await catImageURLs(count, false);
+  const images: Element[] = [];
+  for (const URL of imageURLs) {
+    const image = createImage(URL);
+    images.push(image);
+  }
+  return images;
+};
+
+const createImage = (imageURL: string): Element => {
   const image = document.createElement('img');
 
-  const imageURL = await catImageURL(false);
   image.setAttribute('src', imageURL);
 
   return image;
