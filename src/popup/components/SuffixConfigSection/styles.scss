@@ -1,0 +1,8 @@
+@import '/src/popup/popup.scss';
+
+.icon-container {
+  width: 4 * $size;
+  display: flex;
+  align-items: center;
+  color: green;
+}

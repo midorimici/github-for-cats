@@ -3,6 +3,13 @@ $grey: #aaa;
 $light-grey: #eee;
 $size: 4px;
 
+body {
+  width: 100 * $size;
+  margin: 4 * $size;
+  font-family: 'Kosugi Maru', 'Meiryo', sans-serif;
+  font-size: 4 * $size;
+}
+
 input {
   border: none;
   padding: 2 * $size 0;
@@ -17,6 +24,7 @@ input {
 }
 
 .title {
+  margin: 0;
   font-size: 1.6rem;
 }
 
@@ -47,11 +55,4 @@ input {
   &:focus-within {
     background-color: transparent;
   }
-}
-
-.icon-container {
-  width: 4 * $size;
-  display: flex;
-  align-items: center;
-  color: green;
 }
