@@ -4,10 +4,12 @@ import { fetchFromStorage } from './lib/storage';
 import { replaceAvatarImages } from './replace_avatar_images';
 
 const main = async () => {
-  const { isSuffixEnabled, isAvatarImageReplacementEnabled } = await fetchFromStorage([
-    'isSuffixEnabled',
-    'isAvatarImageReplacementEnabled',
-  ]);
+  const { isSuffixEnabled, isAvatarImageReplacementEnabled, isAddImagesToCommentsEnabled } =
+    await fetchFromStorage([
+      'isSuffixEnabled',
+      'isAvatarImageReplacementEnabled',
+      'isAddImagesToCommentsEnabled',
+    ]);
   if (isSuffixEnabled) {
     addSuffixes();
   }
@@ -16,7 +18,9 @@ const main = async () => {
     replaceAvatarImages();
   }
 
-  addCatImages();
+  if (isAddImagesToCommentsEnabled) {
+    addCatImages();
+  }
 };
 
 const setupObserver = () => {

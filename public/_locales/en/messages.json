@@ -25,5 +25,8 @@
   },
   "refreshAvatarImages": {
     "message": "Referesh avatar images"
+  },
+  "addImagesToComments": {
+    "message": "Add images to comments"
   }
 }
