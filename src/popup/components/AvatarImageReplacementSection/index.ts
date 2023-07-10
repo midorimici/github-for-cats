@@ -1,0 +1,1 @@
+export { AvatarImageReplacementSection } from './AvatarImageReplacementSection';

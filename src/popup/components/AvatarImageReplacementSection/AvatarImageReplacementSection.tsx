@@ -8,7 +8,7 @@ import { CheckCircle } from '~/popup/shared/CheckCircle';
 
 const t = chrome.i18n.getMessage;
 
-export const SkipUserConfigSection: React.FC = () => {
+export const AvatarImageReplacementSection: React.FC = () => {
   const replaceImageLabel = t('replaceAvatarImages');
   const skipUserLabel = t('skipUser');
   const regexSupportedLabel = t('regexSupported');
