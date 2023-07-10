@@ -1,6 +1,6 @@
 import { t } from '~/lib/i18n';
-import { AvatarImageReplacementSection } from './components/AvatarImageReplacementSection';
-import { SuffixConfigSection } from './components/SuffixConfigSection';
+import { AvatarImageReplacementSection } from './components/domain/AvatarImageReplacementSection';
+import { SuffixConfigSection } from './components/domain/SuffixConfigSection';
 import './popup.scss';
 
 export const Popup = () => {
