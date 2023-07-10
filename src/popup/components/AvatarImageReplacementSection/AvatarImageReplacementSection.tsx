@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useSkipUsers } from './useSkipUsers';
 import React from 'react';
 import { useIsEnabled } from '~/popup/components/hooks/useIsEnabled';
 import { CheckCircle } from '~/popup/shared/CheckCircle';
+import { useRefreshImages } from './useRefreshImages';
 
 const t = chrome.i18n.getMessage;
 
@@ -37,6 +38,7 @@ export const AvatarImageReplacementSection: React.FC = () => {
             </div>
           </label>
           <UserNameList userNames={userNames} deleteUserName={deleteUserName} />
+          <RefreshButton />
         </>
       )}
     </section>
@@ -69,5 +71,17 @@ const UserName: React.FC<UserNameProps> = ({ name, onDelete }) => {
       {name}
       <FontAwesomeIcon cursor="pointer" icon={faClose} onClick={onDelete} />
     </span>
+  );
+};
+
+const RefreshButton: React.FC = () => {
+  const buttonLabel = t('refreshAvatarImages');
+
+  const { isLoading, handleClickRefreshButton } = useRefreshImages();
+
+  return (
+    <button className="refresh-button" disabled={isLoading} onClick={handleClickRefreshButton}>
+      {isLoading ? <FontAwesomeIcon pulse={true} icon={faSpinner} /> : buttonLabel}
+    </button>
   );
 };

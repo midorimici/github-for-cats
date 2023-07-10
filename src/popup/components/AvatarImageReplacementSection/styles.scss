@@ -17,3 +17,23 @@
   font-family: Consolas;
   overflow-wrap: anywhere;
 }
+
+.refresh-button {
+  align-self: flex-end;
+  min-width: 170px;
+  height: 36px;
+  border-radius: 2 * $size;
+  background-color: $light-grey;
+  border: none;
+  padding: 2 * $size;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  &:hover {
+    background-color: $grey;
+  }
+  &:disabled {
+    cursor: wait;
+    background-color: $light-grey;
+  }
+}
