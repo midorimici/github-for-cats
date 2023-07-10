@@ -24,9 +24,9 @@
     "message": "正規表現対応"
   },
   "refreshAvatarImages": {
-    "message": "アバター画像を更新"
+    "message": "アバター画像を更新する"
   },
   "addImagesToComments": {
-    "message": "コメントに画像を追加"
+    "message": "コメントに画像を追加する"
   }
 }
