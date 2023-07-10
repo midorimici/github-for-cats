@@ -50,7 +50,7 @@ const SuffixForm: React.FC<SuffixFormProps> = ({ label, suffix, setSuffix, suffi
     <label className="label">
       {label}
       <div className="inline-form">
-        <input type="text" defaultValue={suffix} onBlur={handleBlur} />
+        <input type="text" defaultValue={suffix} maxLength={100} onBlur={handleBlur} />
         <div className="icon-container">
           {isShowingDoneIcon && <FontAwesomeIcon icon={faCheck} />}
         </div>
