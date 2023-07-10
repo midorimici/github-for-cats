@@ -10,7 +10,7 @@ const defaultJaSuffix = 'にゃ';
 const defaultSkipUsers = ['github-actions(?:\\[bot\\])?'];
 const defaultAvatarImages = {};
 
-type StorageData = {
+export type StorageData = {
   isSuffixEnabled: boolean;
   [abSuffixKey]: string;
   [jaSuffixKey]: string;

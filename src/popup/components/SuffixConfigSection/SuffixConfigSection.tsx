@@ -5,8 +5,8 @@ import { useFetchSuffix } from './useFetchSuffix';
 import { useSaveSuffix } from './useSaveSuffix';
 import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
 import './styles.scss';
-import { useIsEnabled } from './useIsEnabled';
 import { CheckCircle } from '~/popup/shared/CheckCircle';
+import { useIsEnabled } from '~/popup/components/hooks/useIsEnabled';
 
 const t = chrome.i18n.getMessage;
 
@@ -19,7 +19,7 @@ export const SuffixConfigSection: React.FC = () => {
   const [jaSuffix, setJaSuffix] = useState<string>('');
   useFetchSuffix(setAbSuffix, setJaSuffix);
 
-  const { isEnabled, toggle } = useIsEnabled();
+  const { isEnabled, toggle } = useIsEnabled('isSuffixEnabled');
 
   return (
     <section className="config-container">

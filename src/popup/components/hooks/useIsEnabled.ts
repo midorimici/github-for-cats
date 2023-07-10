@@ -1,17 +1,21 @@
 import { useCallback, useEffect, useState } from 'react';
-import { fetchFromStorage, saveToStorage } from '~/lib/storage';
+import { type StorageData, saveToStorage, fetchFromStorage } from '~/lib/storage';
+
+type BooleanKey = {
+  [Key in keyof StorageData]: StorageData[Key] extends boolean ? Key : never;
+}[keyof StorageData];
 
 type UseIsEnabledReturnType = {
   isEnabled: boolean;
   toggle: () => void;
 };
 
-export const useIsEnabled = (): UseIsEnabledReturnType => {
+export const useIsEnabled = <T extends BooleanKey>(key: T): UseIsEnabledReturnType => {
   const [isEnabled, setIsEnabled] = useState(true);
 
   const fetch = useCallback(async () => {
-    const { isSuffixEnabled } = await fetchFromStorage(['isSuffixEnabled']);
-    setIsEnabled(isSuffixEnabled);
+    const value = await fetchFromStorage([key]);
+    setIsEnabled(value[key]);
   }, [setIsEnabled]);
 
   useEffect(() => {
@@ -21,7 +25,7 @@ export const useIsEnabled = (): UseIsEnabledReturnType => {
   const toggle = useCallback(() => {
     const value = !isEnabled;
     setIsEnabled(value);
-    saveToStorage('isSuffixEnabled', value);
+    saveToStorage(key, value);
   }, [isEnabled, setIsEnabled]);
 
   return { isEnabled, toggle };
