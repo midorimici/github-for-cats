@@ -10,7 +10,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "tabs"],
   "host_permissions": ["https://github.com"],
   "content_scripts": [
     {
