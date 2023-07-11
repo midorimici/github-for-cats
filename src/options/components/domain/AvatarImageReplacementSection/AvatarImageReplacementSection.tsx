@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { useSkipUsers } from './useSkipUsers';
 import React from 'react';
 import { useIsEnabled } from '~/options/components/domain/hooks/useIsEnabled';
+import { useList } from '~/options/components/domain/hooks/useList';
 import { CheckCircle } from '~/options/components/shared/CheckCircle';
 import { t } from '~/lib/i18n';
 
@@ -12,7 +12,7 @@ export const AvatarImageReplacementSection: React.FC = () => {
   const skipUserLabel = t('skipUser');
   const regexSupportedLabel = t('regexSupported');
 
-  const { userNames, handleKeyDown, deleteUserName } = useSkipUsers();
+  const { list: userNames, deleteItem: deleteUserName, handleKeyDown } = useList('skipUsers');
 
   const { isEnabled, toggle } = useIsEnabled('isAvatarImageReplacementEnabled');
 
