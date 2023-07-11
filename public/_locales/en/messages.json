@@ -28,5 +28,8 @@
   },
   "addImagesToComments": {
     "message": "Add images to comments"
+  },
+  "skipPages": {
+    "message": "Ignored pages"
   }
 }

@@ -28,5 +28,8 @@
   },
   "addImagesToComments": {
     "message": "コメントに画像を追加する"
+  },
+  "skipPages": {
+    "message": "適用しないページ"
   }
 }
