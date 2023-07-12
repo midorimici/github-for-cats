@@ -43,8 +43,8 @@ main();
 setupObserver();
 
 chrome.runtime.onMessage.addListener(
-  (msg: { refreshImages: boolean }, _, sendResponse: (response: boolean) => void) => {
-    if (msg.refreshImages === true) {
+  (msg: 'refreshImages', _, sendResponse: (response: boolean) => void) => {
+    if (msg === 'refreshImages') {
       replaceAvatarImages();
       sendResponse(true);
     }
