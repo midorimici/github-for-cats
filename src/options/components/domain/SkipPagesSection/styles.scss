@@ -1,0 +1,14 @@
+@import '/src/options/options.scss';
+
+.description {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+
+  code {
+    font-family: Consolas;
+    background-color: $light-grey;
+    padding: $size;
+    border-radius: $size;
+  }
+}

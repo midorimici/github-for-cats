@@ -8,6 +8,7 @@ const avatarImagesKey = 'avatarImages';
 const defaultAbSuffix = 'nya';
 const defaultJaSuffix = 'にゃ';
 const defaultSkipUsers = ['github-actions(?:\\[bot\\])?'];
+const defaultSkipPages = ['.*settings'];
 const defaultAvatarImages = {};
 
 export type StorageData = {
@@ -18,6 +19,7 @@ export type StorageData = {
   [jaSuffixKey]: string;
   [skipUsersKey]: string[];
   [avatarImagesKey]: Record<string, string>;
+  skipPages: string[];
 };
 
 const defaultValues: Readonly<StorageData> = {
@@ -28,6 +30,7 @@ const defaultValues: Readonly<StorageData> = {
   jaSuffix: defaultJaSuffix,
   skipUsers: defaultSkipUsers,
   avatarImages: defaultAvatarImages,
+  skipPages: defaultSkipPages,
 };
 
 export const fetchFromStorage = async <T extends keyof StorageData>(
