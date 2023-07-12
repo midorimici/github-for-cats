@@ -20,9 +20,12 @@ export const useRefreshImages = (): UseRefreshImagesReturnType => {
 
   const refreshImages = useCallback(async () => {
     const ct = chrome.tabs;
-    const [tab] = await ct.query({ active: true, lastFocusedWindow: true });
-    if (tab !== undefined && tab.id !== undefined && tab.url?.startsWith('https://github.com')) {
-      await ct.sendMessage(tab.id, { refreshImages: true });
+    const [tab] = await ct.query({ active: true, currentWindow: true });
+    if (tab !== undefined && tab.id !== undefined) {
+      const res = await ct.sendMessage<string, boolean>(tab.id, 'refreshImages');
+      if (!res) {
+        console.error('refreshImages failed');
+      }
     }
   }, []);
 
