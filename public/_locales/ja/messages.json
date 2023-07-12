@@ -31,5 +31,22 @@
   },
   "skipPages": {
     "message": "適用しないページ"
+  },
+  "skipPagesDesc": {
+    "message": "$PATTERN$ に続く正規表現に URL がマッチするページには適用が無視されます。\n例えば $INPUT_EXAMPLE$ を指定すると、URL が $PATTERN_EXAMPLE$ にマッチするページには拡張機能が適用されません。",
+    "placeholders": {
+      "pattern": {
+        "content": "<$1>",
+        "example": "^https://github.com/"
+      },
+      "input_example": {
+        "content": "<$2>",
+        "example": ".*settings"
+      },
+      "pattern_example": {
+        "content": "<$3>",
+        "example": "^https://github.com/.*settings"
+      }
+    }
   }
 }

@@ -31,5 +31,22 @@
   },
   "skipPages": {
     "message": "Ignored pages"
+  },
+  "skipPagesDesc": {
+    "message": "Ignore pages with URL that match specified regular expression followed by $PATTERN$.\nFor example, when you specify $INPUT_EXAMPLE$, the extension does not apply to pages with URL that match $PATTERN_EXAMPLE$",
+    "placeholders": {
+      "pattern": {
+        "content": "<$1>",
+        "example": "^https://github.com/"
+      },
+      "input_example": {
+        "content": "<$2>",
+        "example": ".*settings"
+      },
+      "pattern_example": {
+        "content": "<$3>",
+        "example": "^https://github.com/.*settings"
+      }
+    }
   }
 }
