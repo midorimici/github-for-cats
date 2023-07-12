@@ -37,7 +37,6 @@ export const AvatarImageReplacementSection: React.FC = () => {
             </div>
           </label>
           <UserNameList userNames={userNames} deleteUserName={deleteUserName} />
-          <RefreshButton />
         </>
       )}
     </section>
