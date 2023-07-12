@@ -8,7 +8,7 @@ const config = (): Configuration => {
     entry: {
       content_scripts: path.join(__dirname, 'src', 'contentScripts', 'main.ts'),
       background: path.join(__dirname, 'src', 'background', 'main.ts'),
-      popup: path.join(__dirname, 'src', 'popup', 'index.tsx'),
+      options: path.join(__dirname, 'src', 'options', 'index.tsx'),
     },
     output: {
       // distディレクトリにcontent_scripts.jsを吐く

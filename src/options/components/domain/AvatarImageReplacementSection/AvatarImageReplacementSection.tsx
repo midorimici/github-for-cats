@@ -3,8 +3,8 @@ import './styles.scss';
 import { faClose, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useSkipUsers } from './useSkipUsers';
 import React from 'react';
-import { useIsEnabled } from '~/popup/components/domain/hooks/useIsEnabled';
-import { CheckCircle } from '~/popup/components/shared/CheckCircle';
+import { useIsEnabled } from '~/options/components/domain/hooks/useIsEnabled';
+import { CheckCircle } from '~/options/components/shared/CheckCircle';
 import { useRefreshImages } from './useRefreshImages';
 import { t } from '~/lib/i18n';
 

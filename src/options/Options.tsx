@@ -2,9 +2,9 @@ import { t } from '~/lib/i18n';
 import { SuffixConfigSection } from './components/domain/SuffixConfigSection';
 import { AvatarImageReplacementSection } from './components/domain/AvatarImageReplacementSection';
 import { AddImagesSection } from './components/domain/AddImagesSection';
-import './popup.scss';
+import './options.scss';
 
-export const Popup = () => {
+export const Options = () => {
   const configLabel = t('configurations');
 
   return (

@@ -1,6 +1,6 @@
 import { t } from '~/lib/i18n';
-import { useIsEnabled } from '~/popup/components/domain/hooks/useIsEnabled';
-import { CheckCircle } from '~/popup/components/shared/CheckCircle';
+import { useIsEnabled } from '~/options/components/domain/hooks/useIsEnabled';
+import { CheckCircle } from '~/options/components/shared/CheckCircle';
 
 export const AddImagesSection: React.FC = () => {
   const addImagesLabel = t('addImagesToComments');
