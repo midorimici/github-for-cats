@@ -20,8 +20,10 @@ export const SuffixConfigSection: React.FC = () => {
 
   const { isEnabled, toggle } = useIsEnabled('isSuffixEnabled');
 
+  const sectionClassName = `config-container ${isEnabled ? 'active' : 'inactive'}`;
+
   return (
-    <section className="config-container">
+    <section className={sectionClassName}>
       <label className="config-title-container" onClick={toggle}>
         <CheckCircle isChecked={isEnabled} />
         {suffixLabel}

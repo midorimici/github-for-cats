@@ -6,8 +6,10 @@ export const AddImagesSection: React.FC = () => {
   const addImagesLabel = t('addImagesToComments');
   const { isEnabled, toggle } = useIsEnabled('isAddImagesToCommentsEnabled');
 
+  const sectionClassName = `config-container ${isEnabled ? 'active' : 'inactive'}`;
+
   return (
-    <section className="config-container">
+    <section className={sectionClassName}>
       <label className="config-title-container" onClick={toggle}>
         <CheckCircle isChecked={isEnabled} />
         {addImagesLabel}
