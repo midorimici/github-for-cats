@@ -2,10 +2,11 @@ $primary-color: beige;
 $grey: #aaa;
 $light-grey: #eee;
 $size: 4px;
+$page-width: 640px;
 
 body {
-  width: 100 * $size;
-  margin: 4 * $size;
+  width: $page-width;
+  margin: 8 * $size auto;
   font-family: 'Kosugi Maru', 'Meiryo', sans-serif;
   font-size: 4 * $size;
 }
@@ -20,7 +21,7 @@ input {
 .container {
   display: flex;
   flex-direction: column;
-  gap: 6 * $size;
+  gap: 8 * $size;
 }
 
 .title {
