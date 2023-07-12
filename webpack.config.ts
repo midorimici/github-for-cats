@@ -8,6 +8,7 @@ const config = (): Configuration => {
     entry: {
       content_scripts: path.join(__dirname, 'src', 'contentScripts', 'main.ts'),
       background: path.join(__dirname, 'src', 'background', 'main.ts'),
+      options: path.join(__dirname, 'src', 'options', 'index.tsx'),
       popup: path.join(__dirname, 'src', 'popup', 'index.tsx'),
     },
     output: {

@@ -1,0 +1,19 @@
+@import '/src/options/options.scss';
+
+.username-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2 * $size;
+}
+
+.username-item {
+  display: inline-flex;
+  gap: 2 * $size;
+  align-items: center;
+  width: max-content;
+  background-color: $primary-color;
+  padding: 2 * $size;
+  border-radius: 4 * $size;
+  font-family: Consolas;
+  overflow-wrap: anywhere;
+}

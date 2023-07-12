@@ -6,8 +6,8 @@ import { useSaveSuffix } from './useSaveSuffix';
 import { t } from '~/lib/i18n';
 import { abSuffixKey, jaSuffixKey } from '~/lib/storage';
 import './styles.scss';
-import { CheckCircle } from '~/popup/components/shared/CheckCircle';
-import { useIsEnabled } from '~/popup/components/domain/hooks/useIsEnabled';
+import { CheckCircle } from '~/options/components/shared/CheckCircle';
+import { useIsEnabled } from '~/options/components/domain/hooks/useIsEnabled';
 
 export const SuffixConfigSection: React.FC = () => {
   const suffixLabel = t('suffix');
@@ -20,8 +20,10 @@ export const SuffixConfigSection: React.FC = () => {
 
   const { isEnabled, toggle } = useIsEnabled('isSuffixEnabled');
 
+  const sectionClassName = `config-container ${isEnabled ? 'active' : 'inactive'}`;
+
   return (
-    <section className="config-container">
+    <section className={sectionClassName}>
       <label className="config-title-container" onClick={toggle}>
         <CheckCircle isChecked={isEnabled} />
         {suffixLabel}

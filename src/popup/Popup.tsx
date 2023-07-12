@@ -1,18 +1,21 @@
+import './styles.scss';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { t } from '~/lib/i18n';
-import { SuffixConfigSection } from './components/domain/SuffixConfigSection';
-import { AvatarImageReplacementSection } from './components/domain/AvatarImageReplacementSection';
-import { AddImagesSection } from './components/domain/AddImagesSection';
-import './popup.scss';
+import { useRefreshImages } from './useRefreshImages';
 
 export const Popup = () => {
-  const configLabel = t('configurations');
+  return <RefreshButton />;
+};
+
+const RefreshButton: React.FC = () => {
+  const buttonLabel = t('refreshAvatarImages');
+
+  const { isLoading, handleClickRefreshButton } = useRefreshImages();
 
   return (
-    <div className="container">
-      <h1 className="title">{configLabel}</h1>
-      <SuffixConfigSection />
-      <AvatarImageReplacementSection />
-      <AddImagesSection />
-    </div>
+    <button className="refresh-button" disabled={isLoading} onClick={handleClickRefreshButton}>
+      {isLoading ? <FontAwesomeIcon pulse={true} icon={faSpinner} /> : buttonLabel}
+    </button>
   );
 };

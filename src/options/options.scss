@@ -1,11 +1,14 @@
-$primary-color: beige;
+$primary-color: #e0f080;
+$active-color: #f0fff0;
 $grey: #aaa;
 $light-grey: #eee;
+$white-grey: #f7f7f7;
 $size: 4px;
+$page-width: 640px;
 
 body {
-  width: 100 * $size;
-  margin: 4 * $size;
+  width: $page-width;
+  margin: 8 * $size auto;
   font-family: 'Kosugi Maru', 'Meiryo', sans-serif;
   font-size: 4 * $size;
 }
@@ -20,7 +23,7 @@ input {
 .container {
   display: flex;
   flex-direction: column;
-  gap: 6 * $size;
+  gap: 8 * $size;
 }
 
 .title {
@@ -31,14 +34,24 @@ input {
 .config-container {
   display: flex;
   flex-direction: column;
-  gap: 2 * $size;
+  gap: 4 * $size;
+  padding: 4 * $size;
+  border-radius: 4 * $size;
+  transition: background-color 0.4s;
+
+  &.active {
+    background-color: $active-color;
+  }
+
+  &.inactive {
+    background-color: $white-grey;
+  }
 }
 
 .config-title-container {
   display: flex;
   align-items: center;
   gap: 2 * $size;
-  margin-bottom: 2 * $size;
   font-size: 1.2rem;
   cursor: pointer;
 }
@@ -62,6 +75,6 @@ input {
 
   transition: background-color 0.4s;
   &:focus-within {
-    background-color: transparent;
+    background-color: white;
   }
 }
