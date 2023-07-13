@@ -1,0 +1,27 @@
+@import '/src/options/options.scss';
+
+.radio-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 4 * $size;
+}
+
+legend {
+  margin-bottom: 4 * $size;
+}
+
+.radio-container {
+  display: inline-flex;
+  gap: 2 * $size;
+  cursor: pointer;
+}
+
+.radio-icon-hidden {
+  display: none;
+}
+
+.radio-icon {
+  color: green;
+}

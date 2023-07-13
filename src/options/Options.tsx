@@ -3,6 +3,7 @@ import { SuffixConfigSection } from './components/domain/SuffixConfigSection';
 import { AvatarImageReplacementSection } from './components/domain/AvatarImageReplacementSection';
 import { AddImagesSection } from './components/domain/AddImagesSection';
 import { SkipPagesSection } from './components/domain/SkipPagesSection';
+import { AnimalChoiceSection } from './components/domain/AnimalChoiceSection';
 import './options.scss';
 
 export const Options = () => {
@@ -15,6 +16,7 @@ export const Options = () => {
       <AvatarImageReplacementSection />
       <AddImagesSection />
       <SkipPagesSection />
+      <AnimalChoiceSection />
     </div>
   );
 };
