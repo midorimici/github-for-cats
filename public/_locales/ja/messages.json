@@ -48,5 +48,14 @@
         "example": "^https://github.com/.*settings"
       }
     }
+  },
+  "displayedAnimal": {
+    "message": "表示する動物"
+  },
+  "cat": {
+    "message": "ねこ"
+  },
+  "dog": {
+    "message": "いぬ"
   }
 }

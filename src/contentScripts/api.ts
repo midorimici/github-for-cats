@@ -1,3 +1,5 @@
+import { fetchFromStorage, type AnimalOption } from '~/lib/storage';
+
 const maxTryCount = 5;
 
 type ImageData = {
@@ -34,6 +36,12 @@ export const catImageURLs = async (count: number, isAvatar: boolean): Promise<st
   return URLs;
 };
 
+const fetchAPI = async (queryParams: string): Promise<Response> => {
+  const response = await fetch(`${randomChoice(APIURLs)}?${queryParams}`);
+  const json = await response.json();
+  return json;
+};
+
 const sizeOption = ['small', 'med', 'full'];
 const mimeTypesOption = ['png,jpg', 'gif'];
 
@@ -42,18 +50,34 @@ const randomChoice = (options: string[]): string => {
   return options[index];
 };
 
-const availableCategoryIDs = [1, 4, 5, 7, 14, 15];
-const categoryIDCount = availableCategoryIDs.length;
+let animalOption: AnimalOption;
 
-const randomCategoryID = (): number => {
-  const index = Math.floor(categoryIDCount * Math.random());
-  return availableCategoryIDs[index];
+const fetchAnimalOption = async () => {
+  const { animal } = await fetchFromStorage(['animal']);
+  animalOption = animal;
 };
 
-const theCatAPIURL = 'https://api.thecatapi.com/v1/images/search';
+const getAPIURLs = (): string[] => {
+  const catAPI = 'https://api.thecatapi.com/v1/images/search';
+  const dogAPI = 'https://api.thedogapi.com/v1/images/search';
 
-const fetchAPI = async (queryParams: string): Promise<Response> => {
-  const response = await fetch(`${theCatAPIURL}?${queryParams}`);
-  const json = await response.json();
-  return json;
+  switch (animalOption) {
+    case 'cat':
+      return [catAPI];
+
+    case 'dog':
+      return [dogAPI];
+
+    case 'both':
+      return [catAPI, dogAPI];
+
+    default:
+      console.warn(`animal option is invalid: ${animalOption}`);
+      return [catAPI];
+  }
 };
+
+let APIURLs: string[];
+fetchAnimalOption().then(() => {
+  APIURLs = getAPIURLs();
+});

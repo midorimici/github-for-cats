@@ -48,5 +48,14 @@
         "example": "^https://github.com/.*settings"
       }
     }
+  },
+  "displayedAnimal": {
+    "message": "Displayed animal"
+  },
+  "cat": {
+    "message": "Cats"
+  },
+  "dog": {
+    "message": "Dogs"
   }
 }

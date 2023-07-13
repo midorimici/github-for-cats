@@ -11,6 +11,9 @@ const defaultSkipUsers = ['github-actions(?:\\[bot\\])?'];
 const defaultSkipPages = ['.*settings'];
 const defaultAvatarImages = {};
 
+export type AnimalOption = 'cat' | 'dog' | 'both';
+const defaultAnimal: AnimalOption = 'cat';
+
 export type StorageData = {
   isSuffixEnabled: boolean;
   isAvatarImageReplacementEnabled: boolean;
@@ -20,6 +23,7 @@ export type StorageData = {
   [skipUsersKey]: string[];
   [avatarImagesKey]: Record<string, string>;
   skipPages: string[];
+  animal: AnimalOption;
 };
 
 const defaultValues: Readonly<StorageData> = {
@@ -31,6 +35,7 @@ const defaultValues: Readonly<StorageData> = {
   skipUsers: defaultSkipUsers,
   avatarImages: defaultAvatarImages,
   skipPages: defaultSkipPages,
+  animal: defaultAnimal,
 };
 
 export const fetchFromStorage = async <T extends keyof StorageData>(
