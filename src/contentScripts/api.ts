@@ -42,14 +42,6 @@ const randomChoice = (options: string[]): string => {
   return options[index];
 };
 
-const availableCategoryIDs = [1, 4, 5, 7, 14, 15];
-const categoryIDCount = availableCategoryIDs.length;
-
-const randomCategoryID = (): number => {
-  const index = Math.floor(categoryIDCount * Math.random());
-  return availableCategoryIDs[index];
-};
-
 const theCatAPIURL = 'https://api.thecatapi.com/v1/images/search';
 
 const fetchAPI = async (queryParams: string): Promise<Response> => {
