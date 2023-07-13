@@ -59,9 +59,15 @@ const createImages = async (count: number): Promise<Element[]> => {
 };
 
 const createImage = (imageURL: string): Element => {
-  const image = document.createElement('img');
+  const a = document.createElement('a');
+  a.setAttribute('target', '_blank');
+  a.setAttribute('rel', 'noopener noreferer nofollow');
+  a.setAttribute('href', imageURL);
 
+  const image = document.createElement('img');
   image.setAttribute('src', imageURL);
 
-  return image;
+  a.appendChild(image);
+
+  return a;
 };
