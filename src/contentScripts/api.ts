@@ -18,9 +18,9 @@ export const catImageURLs = async (count: number, isAvatar: boolean): Promise<st
   } else {
     let needCount = count;
     for (let i = 0; i < maxTryCount; i++) {
-      const size = randomSize();
-      const categoryID = randomCategoryID();
-      queryParams = `limit=${needCount}&size=${size}&category_ids=${categoryID}`;
+      const size = randomChoice(sizeOption);
+      const mimeTypes = randomChoice(mimeTypesOption);
+      queryParams = `limit=${needCount}&size=${size}&mime_types=${mimeTypes}`;
       response = await fetchAPI(queryParams);
       if (response.length >= needCount) {
         break;
@@ -34,11 +34,12 @@ export const catImageURLs = async (count: number, isAvatar: boolean): Promise<st
   return URLs;
 };
 
-const sizeOption = ['small', 'med', 'full'] as const;
+const sizeOption = ['small', 'med', 'full'];
+const mimeTypesOption = ['png,jpg', 'gif'];
 
-const randomSize = (): (typeof sizeOption)[number] => {
-  const index = Math.floor(3 * Math.random());
-  return sizeOption[index];
+const randomChoice = (options: string[]): string => {
+  const index = Math.floor(options.length * Math.random());
+  return options[index];
 };
 
 const availableCategoryIDs = [1, 4, 5, 7, 14, 15];
