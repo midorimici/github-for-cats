@@ -6,7 +6,7 @@ import { fetchFromStorage } from '~/lib/storage';
 
 let isSkippedPage: boolean;
 
-const main = async () => {
+const main = async (baseElement: Element) => {
   isSkippedPage = await shouldSkip();
   if (isSkippedPage) {
     return;
@@ -20,15 +20,15 @@ const main = async () => {
     ]);
 
   if (isSuffixEnabled) {
-    addSuffixes();
+    addSuffixes(baseElement);
   }
 
   if (isAvatarImageReplacementEnabled) {
-    replaceAvatarImages();
+    replaceAvatarImages(baseElement);
   }
 
   if (isAddImagesToCommentsEnabled) {
-    addCatImages();
+    addCatImages(baseElement);
   }
 };
 
@@ -47,14 +47,14 @@ const shouldSkip = async (): Promise<boolean> => {
   return false;
 };
 
-main();
+main(document.body);
 setupObservers(main);
 
 chrome.runtime.onMessage.addListener(
   (msg: 'refreshImages', _, sendResponse: (response: boolean) => void) => {
     if (msg === 'refreshImages') {
       if (!isSkippedPage) {
-        replaceAvatarImages();
+        replaceAvatarImages(document.body);
       }
       sendResponse(true);
       return;
