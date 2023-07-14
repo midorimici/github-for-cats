@@ -4,7 +4,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const config = (): Configuration => {
   return {
-    mode: 'production',
+    mode: 'development',
     entry: {
       content_scripts: path.join(__dirname, 'src', 'contentScripts', 'main.ts'),
       background: path.join(__dirname, 'src', 'background', 'main.ts'),
@@ -12,7 +12,6 @@ const config = (): Configuration => {
       popup: path.join(__dirname, 'src', 'popup', 'index.tsx'),
     },
     output: {
-      // distディレクトリにcontent_scripts.jsを吐く
       path: path.join(__dirname, 'dist'),
       filename: '[name].js',
     },
@@ -47,7 +46,6 @@ const config = (): Configuration => {
       extensions: ['.ts', '.tsx', '.js'],
     },
     plugins: [
-      // publicディレクトリにあるファイルをdistディレクトリにコピーする
       new CopyWebpackPlugin({
         patterns: [{ from: 'public', to: '.' }],
       }),
