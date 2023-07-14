@@ -34,7 +34,7 @@ const targetComments = (): Element[] => {
 
   const targets: Element[] = [];
   for (const comment of comments) {
-    if (hasImageAsLastChild(comment)) {
+    if (hasMediaAsLastChild(comment)) {
       continue;
     }
 
@@ -44,8 +44,16 @@ const targetComments = (): Element[] => {
   return targets;
 };
 
-const hasImageAsLastChild = (comment: Element): boolean => {
-  return comment.lastElementChild?.lastElementChild?.lastElementChild?.nodeName === 'IMG';
+const hasMediaAsLastChild = (comment: Element): boolean => {
+  const lastElement = comment.lastElementChild;
+  if (lastElement === null) {
+    return false;
+  }
+
+  return (
+    lastElement.getElementsByTagName('img').length > 0 ||
+    lastElement.getElementsByTagName('video').length > 0
+  );
 };
 
 const createImages = async (count: number): Promise<Element[]> => {
