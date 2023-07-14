@@ -1,6 +1,7 @@
 import { addCatImages } from './addImages';
 import { addSuffixes } from './addSuffixes';
 import { replaceAvatarImages } from './replaceAvatarImages';
+import { setupObservers } from './observers';
 import { fetchFromStorage } from '~/lib/storage';
 
 let isSkippedPage: boolean;
@@ -46,24 +47,8 @@ const shouldSkip = async (): Promise<boolean> => {
   return false;
 };
 
-const setupObserver = () => {
-  const target = document.getElementById('repo-content-turbo-frame');
-  if (target === null) {
-    return;
-  }
-
-  const callback = () => {
-    if (target.hasAttribute('complete')) {
-      main();
-    }
-  };
-
-  const observer = new MutationObserver(callback);
-  observer.observe(target, { attributeFilter: ['complete'] });
-};
-
 main();
-setupObserver();
+setupObservers(main);
 
 chrome.runtime.onMessage.addListener(
   (msg: 'refreshImages', _, sendResponse: (response: boolean) => void) => {
