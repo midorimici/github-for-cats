@@ -37,7 +37,11 @@ const setupTimelineObserver = (mainFunc: (baseElement: Element) => void) => {
         }
 
         const classes = node.classList;
-        if (classes.contains('js-timeline-item') || classes.contains('review-comment')) {
+        if (
+          classes.contains('js-timeline-item') ||
+          classes.contains('review-comment') ||
+          node.getElementsByClassName('review-comment').length > 0
+        ) {
           mainFunc(node);
         }
       }
