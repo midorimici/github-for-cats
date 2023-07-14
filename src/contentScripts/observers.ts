@@ -1,5 +1,6 @@
 export const setupObservers = (mainFunc: (baseElement: Element) => void) => {
   setupPageTransitionObserver(mainFunc);
+  setupTimelineObserver(mainFunc);
 };
 
 const setupPageTransitionObserver = (mainFunc: (baseElement: Element) => void) => {
@@ -16,4 +17,28 @@ const setupPageTransitionObserver = (mainFunc: (baseElement: Element) => void) =
 
   const observer = new MutationObserver(callback);
   observer.observe(target, { attributeFilter: ['complete'] });
+};
+
+const setupTimelineObserver = (mainFunc: (baseElement: Element) => void) => {
+  const timeline = document.getElementsByClassName('js-discussion')[0];
+  if (timeline === null) {
+    return;
+  }
+
+  const callback: MutationCallback = (mutationList: MutationRecord[]) => {
+    for (const mutation of mutationList) {
+      if (mutation.type !== 'childList') {
+        continue;
+      }
+
+      for (const node of mutation.addedNodes) {
+        if (node instanceof Element && node.classList.contains('js-timeline-item')) {
+          mainFunc(node);
+        }
+      }
+    }
+  };
+
+  const observer = new MutationObserver(callback);
+  observer.observe(timeline, { childList: true });
 };
