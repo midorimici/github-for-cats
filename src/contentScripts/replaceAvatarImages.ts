@@ -1,15 +1,15 @@
 import { catImageURLs } from './api';
 import { fetchFromStorage, saveToStorage } from '../lib/storage';
 
-export const replaceAvatarImages = () => {
-  const images = findAvatarImages();
+export const replaceAvatarImages = (baseElement: Element) => {
+  const images = findAvatarImages(baseElement);
   replace(images);
 };
 
-const findAvatarImages = (): Element[] => {
+const findAvatarImages = (baseElement: Element): Element[] => {
   const images: Element[] = [];
 
-  const avatars = document.getElementsByClassName('avatar');
+  const avatars = baseElement.getElementsByClassName('avatar');
   for (const avatar of avatars) {
     if (avatar.nodeName === 'IMG') {
       images.push(avatar);

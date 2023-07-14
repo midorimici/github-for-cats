@@ -1,7 +1,7 @@
 import { fetchFromStorage } from '../lib/storage';
 
-export const addSuffixes = async () => {
-  const paragraphs = document.querySelectorAll('p[dir="auto"]');
+export const addSuffixes = async (baseElement: Element) => {
+  const paragraphs = baseElement.querySelectorAll('p[dir="auto"]');
   for (const p of paragraphs) {
     const textNodes = findTextNodes(p);
     for (const textNode of textNodes) {

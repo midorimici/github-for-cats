@@ -2,8 +2,8 @@ import { catImageURLs } from './api';
 
 const per = 10;
 
-export const addCatImages = async () => {
-  const comments = targetComments();
+export const addCatImages = async (baseElement: Element) => {
+  const comments = targetComments(baseElement);
   const commentCount = comments.length;
 
   if (commentCount === 0) {
@@ -30,8 +30,8 @@ export const addCatImages = async () => {
   }
 };
 
-const targetComments = (): Element[] => {
-  const comments = document.getElementsByClassName('comment-body');
+const targetComments = (baseElement: Element): Element[] => {
+  const comments = baseElement.getElementsByClassName('comment-body');
 
   const targets: Element[] = [];
   for (const comment of comments) {

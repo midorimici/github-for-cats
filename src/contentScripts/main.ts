@@ -1,11 +1,12 @@
 import { addCatImages } from './addImages';
 import { addSuffixes } from './addSuffixes';
 import { replaceAvatarImages } from './replaceAvatarImages';
+import { setupObservers } from './observers';
 import { fetchFromStorage } from '~/lib/storage';
 
 let isSkippedPage: boolean;
 
-const main = async () => {
+const main = async (baseElement: Element) => {
   isSkippedPage = await shouldSkip();
   if (isSkippedPage) {
     return;
@@ -19,15 +20,15 @@ const main = async () => {
     ]);
 
   if (isSuffixEnabled) {
-    addSuffixes();
+    addSuffixes(baseElement);
   }
 
   if (isAvatarImageReplacementEnabled) {
-    replaceAvatarImages();
+    replaceAvatarImages(baseElement);
   }
 
   if (isAddImagesToCommentsEnabled) {
-    addCatImages();
+    addCatImages(baseElement);
   }
 };
 
@@ -46,30 +47,14 @@ const shouldSkip = async (): Promise<boolean> => {
   return false;
 };
 
-const setupObserver = () => {
-  const target = document.getElementById('repo-content-turbo-frame');
-  if (target === null) {
-    return;
-  }
-
-  const callback = () => {
-    if (target.hasAttribute('complete')) {
-      main();
-    }
-  };
-
-  const observer = new MutationObserver(callback);
-  observer.observe(target, { attributeFilter: ['complete'] });
-};
-
-main();
-setupObserver();
+main(document.body);
+setupObservers(main);
 
 chrome.runtime.onMessage.addListener(
   (msg: 'refreshImages', _, sendResponse: (response: boolean) => void) => {
     if (msg === 'refreshImages') {
       if (!isSkippedPage) {
-        replaceAvatarImages();
+        replaceAvatarImages(document.body);
       }
       sendResponse(true);
       return;
