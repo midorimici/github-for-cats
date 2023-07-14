@@ -13,6 +13,10 @@ const setupPageTransitionObserver = (
   targetElement: HTMLElement
 ) => {
   const callback: MutationCallback = () => {
+    if (/pull\/\d+$/.test(location.pathname)) {
+      return;
+    }
+
     if (targetElement.hasAttribute('complete')) {
       mainFunc(targetElement);
     }
