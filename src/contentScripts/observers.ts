@@ -32,7 +32,12 @@ const setupTimelineObserver = (mainFunc: (baseElement: Element) => void) => {
       }
 
       for (const node of mutation.addedNodes) {
-        if (node instanceof Element && node.classList.contains('js-timeline-item')) {
+        if (!(node instanceof Element)) {
+          continue;
+        }
+
+        const classes = node.classList;
+        if (classes.contains('js-timeline-item') || classes.contains('review-comment')) {
           mainFunc(node);
         }
       }
@@ -40,5 +45,5 @@ const setupTimelineObserver = (mainFunc: (baseElement: Element) => void) => {
   };
 
   const observer = new MutationObserver(callback);
-  observer.observe(timeline, { childList: true });
+  observer.observe(timeline, { childList: true, subtree: true });
 };
