@@ -1,30 +1,35 @@
 export const setupObservers = (mainFunc: (baseElement: Element) => void) => {
-  setupPageTransitionObserver(mainFunc);
-  setupTimelineObserver(mainFunc);
-};
-
-const setupPageTransitionObserver = (mainFunc: (baseElement: Element) => void) => {
-  const target = document.getElementById('repo-content-turbo-frame');
-  if (target === null) {
+  const targetElement = document.getElementById('repo-content-turbo-frame');
+  if (targetElement === null) {
     return;
   }
 
+  setupPageTransitionObserver(mainFunc, targetElement);
+  setupTimelineObserver(mainFunc, targetElement);
+};
+
+const setupPageTransitionObserver = (
+  mainFunc: (baseElement: Element) => void,
+  targetElement: HTMLElement
+) => {
   const callback: MutationCallback = () => {
-    if (target.hasAttribute('complete')) {
-      mainFunc(target);
+    if (/pull\/\d+$/.test(location.pathname)) {
+      return;
+    }
+
+    if (targetElement.hasAttribute('complete')) {
+      mainFunc(targetElement);
     }
   };
 
   const observer = new MutationObserver(callback);
-  observer.observe(target, { attributeFilter: ['complete'] });
+  observer.observe(targetElement, { attributeFilter: ['complete'] });
 };
 
-const setupTimelineObserver = (mainFunc: (baseElement: Element) => void) => {
-  const timeline = document.getElementsByClassName('js-discussion')[0];
-  if (timeline === null) {
-    return;
-  }
-
+const setupTimelineObserver = (
+  mainFunc: (baseElement: Element) => void,
+  targetElement: HTMLElement
+) => {
   const callback: MutationCallback = (mutationList: MutationRecord[]) => {
     for (const mutation of mutationList) {
       if (mutation.type !== 'childList') {
@@ -49,5 +54,5 @@ const setupTimelineObserver = (mainFunc: (baseElement: Element) => void) => {
   };
 
   const observer = new MutationObserver(callback);
-  observer.observe(timeline, { childList: true, subtree: true });
+  observer.observe(targetElement, { childList: true, subtree: true });
 };
