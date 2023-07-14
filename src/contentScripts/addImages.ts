@@ -19,13 +19,14 @@ export const addCatImages = async () => {
     imagePromises.push(images);
   }
   const images = (await Promise.all(imagePromises)).flat();
+  const shuffledImages = shuffle(images);
 
   for (let i = 0; i < commentCount; i++) {
-    if (i >= images.length) {
+    if (i >= shuffledImages.length) {
       break;
     }
 
-    comments[i].appendChild(images[i]);
+    comments[i].appendChild(shuffledImages[i]);
   }
 };
 
@@ -76,6 +77,18 @@ const createImage = (imageURL: string): Element => {
   image.setAttribute('src', imageURL);
 
   a.appendChild(image);
+
+  return a;
+};
+
+const shuffle = <T>(arr: T[]): T[] => {
+  const a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i];
+    a[i] = a[j];
+    a[j] = t;
+  }
 
   return a;
 };
