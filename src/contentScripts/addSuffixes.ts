@@ -47,8 +47,7 @@ const fetchSuffixes = async () => {
   return suffixes;
 };
 
-const ellipsisRegex = '\\.{2,}|…+';
-const lineEndCharsRegex = `([.。!！?？~～]|${ellipsisRegex})`;
+const lineEndCharsRegex = `([.。．!！?？~～…)）]+)`;
 const lineEndRegex = `${lineEndCharsRegex}?$`;
 
 const abLineEndRegex = new RegExp(`(\\w)${lineEndRegex}`, 'g');
